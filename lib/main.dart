@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'widgets/grey_button.dart';
+import 'widgets/yellow_button.dart';
+import 'widgets/whte24_button.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -34,6 +38,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String displayValue = "0";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,8 +54,8 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.symmetric(horizontal: 35),
             height: 100,
             width: double.infinity,
-            child: const Text(
-              "0",
+            child: Text(
+              displayValue,
               textAlign: TextAlign.end,
               style: TextStyle(fontSize: 50),
             ),
@@ -57,183 +63,58 @@ class _MyHomePageState extends State<MyHomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: const [
-              CircleAvatar(
-                backgroundColor: Colors.grey,
-                radius: 27,
-                child: Text(
-                  "AC",
-                  style: TextStyle(color: Colors.black, fontSize: 25),
-                ),
-              ),
-              CircleAvatar(
-                backgroundColor: Colors.grey,
-                radius: 27,
-                child: Text(
-                  "+/-",
-                  style: TextStyle(color: Colors.black, fontSize: 25),
-                ),
-              ),
-              CircleAvatar(
-                backgroundColor: Colors.grey,
-                radius: 27,
-                child: Text(
-                  "%",
-                  style: TextStyle(color: Colors.black, fontSize: 25),
-                ),
-              ),
-              CircleAvatar(
-                backgroundColor: Colors.orange,
-                radius: 27,
-                child: Text(
-                  "÷",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              )
+              GreyButton("AC"),
+              GreyButton("+/-"),
+              GreyButton("%"),
+              YellowButton("÷")
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: const [
-              CircleAvatar(
-                backgroundColor: Colors.white24,
-                radius: 27,
-                child: Text(
-                  "7",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              ),
-              CircleAvatar(
-                backgroundColor: Colors.white24,
-                radius: 27,
-                child: Text(
-                  "8",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              ),
-              CircleAvatar(
-                backgroundColor: Colors.white24,
-                radius: 27,
-                child: Text(
-                  "9",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              ),
-              CircleAvatar(
-                backgroundColor: Colors.orange,
-                radius: 27,
-                child: Text(
-                  "x",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              )
+              White24Button("7"),
+              White24Button("8"),
+              White24Button("9"),
+              YellowButton("x")
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: const [
-              CircleAvatar(
-                backgroundColor: Colors.white24,
-                radius: 27,
-                child: Text(
-                  "4",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              ),
-              CircleAvatar(
-                backgroundColor: Colors.white24,
-                radius: 27,
-                child: Text(
-                  "5",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              ),
-              CircleAvatar(
-                backgroundColor: Colors.white24,
-                radius: 27,
-                child: Text(
-                  "6",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              ),
-              CircleAvatar(
-                backgroundColor: Colors.orange,
-                radius: 27,
-                child: Text(
-                  "-",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              )
+              White24Button("4"),
+              White24Button("5"),
+              White24Button("6"),
+              YellowButton("-")
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: const [
-              CircleAvatar(
-                backgroundColor: Colors.white24,
-                radius: 27,
-                child: Text(
-                  "1",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              ),
-              CircleAvatar(
-                backgroundColor: Colors.white24,
-                radius: 27,
-                child: Text(
-                  "2",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              ),
-              CircleAvatar(
-                backgroundColor: Colors.white24,
-                radius: 27,
-                child: Text(
-                  "3",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              ),
-              CircleAvatar(
-                backgroundColor: Colors.orange,
-                radius: 27,
-                child: Text(
-                  "+",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              )
+              White24Button("1"),
+              White24Button("2"),
+              White24Button("3"),
+              YellowButton("+"),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                 height: 50,
                 width: 140,
                 decoration: BoxDecoration(
                     color: Colors.white24,
                     borderRadius: BorderRadius.circular(27)),
-                child: Text(
+                child: const Text(
                   textAlign: TextAlign.start,
                   "0",
                   style: TextStyle(color: Colors.white, fontSize: 25),
                 ),
               ),
-              CircleAvatar(
-                backgroundColor: Colors.white24,
-                radius: 27,
-                child: Text(
-                  ".",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              ),
-              CircleAvatar(
-                backgroundColor: Colors.orange,
-                radius: 27,
-                child: Text(
-                  "=",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              )
+              const White24Button("."),
+              const YellowButton("+"),
             ],
           ),
         ],
