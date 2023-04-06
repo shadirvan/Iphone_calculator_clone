@@ -41,34 +41,37 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   var displayValue = "0";
   List<double> nums = [];
+  List<String> operations = ["+", "-", "÷", "x", "=", "AC"];
   callback(varInput) {
     String newValue = "";
-    if (displayValue == "0" && displayValue != "+") {
+    if (displayValue == "0" && !operations.contains(varInput)) {
       setState(() {
         displayValue = varInput;
       });
-    } else if (varInput == "+") {
-      nums.add(double.parse(displayValue));
-      displayValue = "0";
-      print(nums);
-    } else if (varInput == "AC") {
-      nums.clear;
-      print(nums);
-      setState(() {
-        displayValue = "0";
-      });
-    } else if (displayValue != "0" && varInput != "=" && varInput != "=") {
+    } else if (displayValue != "0" && !operations.contains(varInput)) {
       setState(() {
         newValue = displayValue + varInput;
         displayValue = newValue;
       });
-    } else if (varInput == "=" && nums.isNotEmpty) {
-      nums.add(double.parse(displayValue));
-      setState(() {
-        displayValue = nums.sum.toString();
-      });
-      nums.clear();
-      print(nums);
+    } else if (operations.contains(varInput)) {
+      if (varInput == "+") {
+        nums.add(double.parse(displayValue));
+        displayValue = "0";
+        print(nums);
+      } else if (varInput == "AC") {
+        nums.clear;
+        print(nums);
+        setState(() {
+          displayValue = "0";
+        });
+      } else if (varInput == "=" && nums.isNotEmpty) {
+        nums.add(double.parse(displayValue));
+        setState(() {
+          displayValue = nums.sum.toString();
+        });
+        nums.clear();
+        print(nums);
+      }
     }
   }
 
