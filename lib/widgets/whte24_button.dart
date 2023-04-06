@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../main.dart';
-
 class White24Button extends StatelessWidget {
   final String buttonText;
+  Function callBackFunction;
 
-  const White24Button(this.buttonText, {super.key});
+  White24Button(
+      {super.key, required this.buttonText, required this.callBackFunction});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => print("$buttonText Pressed"),
+      onTap: () => callBackFunction(buttonText),
       child: CircleAvatar(
           backgroundColor: Colors.white24,
           radius: 27,

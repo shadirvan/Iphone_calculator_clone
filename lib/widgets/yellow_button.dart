@@ -2,16 +2,21 @@ import 'package:flutter/material.dart';
 
 class YellowButton extends StatelessWidget {
   final String buttonText;
-  const YellowButton(this.buttonText, {super.key});
+  Function callBackFunction;
+
+  YellowButton(this.buttonText, {super.key, required this.callBackFunction});
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      backgroundColor: Colors.orange,
-      radius: 27,
-      child: Text(
-        buttonText,
-        style: const TextStyle(color: Colors.white, fontSize: 25),
+    return GestureDetector(
+      onTap: () => callBackFunction(buttonText),
+      child: CircleAvatar(
+        backgroundColor: Colors.orange,
+        radius: 27,
+        child: Text(
+          buttonText,
+          style: const TextStyle(color: Colors.white, fontSize: 25),
+        ),
       ),
     );
   }

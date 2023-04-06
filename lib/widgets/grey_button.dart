@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 
 class GreyButton extends StatelessWidget {
   final String buttonText;
-  const GreyButton(this.buttonText, {super.key});
+  Function callBackFunction;
+  GreyButton(this.buttonText, {super.key, required this.callBackFunction});
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      backgroundColor: Colors.grey,
-      radius: 27,
-      child: Text(
-        buttonText,
-        style: const TextStyle(color: Colors.black, fontSize: 25),
+    return GestureDetector(
+      onTap: () => callBackFunction(buttonText),
+      child: CircleAvatar(
+        backgroundColor: Colors.grey,
+        radius: 27,
+        child: Text(
+          buttonText,
+          style: const TextStyle(color: Colors.black, fontSize: 25),
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
 
 import 'widgets/grey_button.dart';
 import 'widgets/yellow_button.dart';
@@ -38,7 +39,38 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String displayValue = "0";
+  var displayValue = "0";
+  List<double> nums = [];
+  callback(varInput) {
+    String newValue = "";
+    if (displayValue == "0" && displayValue != "+") {
+      setState(() {
+        displayValue = varInput;
+      });
+    } else if (varInput == "+") {
+      nums.add(double.parse(displayValue));
+      displayValue = "0";
+      print(nums);
+    } else if (varInput == "AC") {
+      nums.clear;
+      print(nums);
+      setState(() {
+        displayValue = "0";
+      });
+    } else if (displayValue != "0" && varInput != "=" && varInput != "=") {
+      setState(() {
+        newValue = displayValue + varInput;
+        displayValue = newValue;
+      });
+    } else if (varInput == "=" && nums.isNotEmpty) {
+      nums.add(double.parse(displayValue));
+      setState(() {
+        displayValue = nums.sum.toString();
+      });
+      nums.clear();
+      print(nums);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,38 +94,41 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
-              GreyButton("AC"),
-              GreyButton("+/-"),
-              GreyButton("%"),
-              YellowButton("÷")
+            children: [
+              GreyButton("AC", callBackFunction: callback),
+              GreyButton("+/-", callBackFunction: callback),
+              GreyButton("%", callBackFunction: callback),
+              YellowButton("÷", callBackFunction: callback)
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
-              White24Button("7"),
-              White24Button("8"),
-              White24Button("9"),
-              YellowButton("x")
+            children: [
+              White24Button(
+                buttonText: "7",
+                callBackFunction: callback,
+              ),
+              White24Button(buttonText: "8", callBackFunction: callback),
+              White24Button(buttonText: "9", callBackFunction: callback),
+              YellowButton("x", callBackFunction: callback)
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
-              White24Button("4"),
-              White24Button("5"),
-              White24Button("6"),
-              YellowButton("-")
+            children: [
+              White24Button(buttonText: "4", callBackFunction: callback),
+              White24Button(buttonText: "5", callBackFunction: callback),
+              White24Button(buttonText: "6", callBackFunction: callback),
+              YellowButton("-", callBackFunction: callback)
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
-              White24Button("1"),
-              White24Button("2"),
-              White24Button("3"),
-              YellowButton("+"),
+            children: [
+              White24Button(buttonText: "1", callBackFunction: callback),
+              White24Button(buttonText: "2", callBackFunction: callback),
+              White24Button(buttonText: "3", callBackFunction: callback),
+              YellowButton("+", callBackFunction: callback),
             ],
           ),
           Row(
@@ -113,8 +148,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: TextStyle(color: Colors.white, fontSize: 25),
                 ),
               ),
-              const White24Button("."),
-              const YellowButton("+"),
+              White24Button(buttonText: ".", callBackFunction: callback),
+              YellowButton("=", callBackFunction: callback),
             ],
           ),
         ],
