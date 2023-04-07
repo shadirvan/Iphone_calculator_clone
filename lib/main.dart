@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:collection/collection.dart';
 
 import 'widgets/grey_button.dart';
 import 'widgets/yellow_button.dart';
@@ -40,37 +39,62 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var displayValue = "0";
-  List<double> nums = [];
-  List<String> operations = ["+", "-", "÷", "x", "=", "AC"];
+  List<String> nonNums = ["+", "-", "÷", "x", "=", "AC", "%", "+/-"];
+  List<String> operands = ["+", "-", "÷", "x"];
+  String previousOperand = "+";
+  String presentOperand = "";
+  double outNum = 0;
   callback(varInput) {
-    String newValue = "";
-    if (displayValue == "0" && !operations.contains(varInput)) {
+    double output(double inNum) {
+      if (previousOperand == "+") {
+        outNum += inNum;
+      } else if (previousOperand == "-") {
+        outNum -= inNum;
+      } else if (previousOperand == "x") {
+        outNum *= inNum;
+      } else if (previousOperand == "÷") {
+        outNum /= inNum;
+      }
+      displayValue = "0";
+      previousOperand = presentOperand;
+      return outNum;
+    }
+
+    if (operands.contains(varInput)) {
+      presentOperand = varInput;
+      print(output(double.parse(displayValue)));
+    } else if (!nonNums.contains(varInput)) {
+      if (displayValue == "0") {
+        setState(() {
+          displayValue = varInput;
+        });
+      } else {
+        setState(() {
+          displayValue += varInput;
+        });
+      }
+    } else if (varInput == "=") {
+      double out = output(double.parse(displayValue));
       setState(() {
-        displayValue = varInput;
+        displayValue = out.toString();
       });
-    } else if (displayValue != "0" && !operations.contains(varInput)) {
+    } else if (varInput == "AC") {
       setState(() {
-        newValue = displayValue + varInput;
-        displayValue = newValue;
-      });
-    } else if (operations.contains(varInput)) {
-      if (varInput == "+") {
-        nums.add(double.parse(displayValue));
         displayValue = "0";
-        print(nums);
-      } else if (varInput == "AC") {
-        nums.clear;
-        print(nums);
+        outNum = 0;
+        previousOperand = "+";
+      });
+    } else if (varInput == "%") {
+      setState(() {
+        displayValue = (double.parse(displayValue) / 100).toString();
+      });
+    } else if (varInput == "+/-") {
+      if (displayValue == "0") {
+        displayValue = "-0";
+      } else {
         setState(() {
-          displayValue = "0";
+          displayValue = (double.parse(displayValue) * -1).toString();
         });
-      } else if (varInput == "=" && nums.isNotEmpty) {
-        nums.add(double.parse(displayValue));
-        setState(() {
-          displayValue = nums.sum.toString();
-        });
-        nums.clear();
-        print(nums);
       }
     }
   }
@@ -78,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color.fromARGB(255, 2, 1, 1),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -137,18 +161,21 @@ class _MyHomePageState extends State<MyHomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-                height: 50,
-                width: 140,
-                decoration: BoxDecoration(
-                    color: Colors.white24,
-                    borderRadius: BorderRadius.circular(27)),
-                child: const Text(
-                  textAlign: TextAlign.start,
-                  "0",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
+              GestureDetector(
+                onTap: () => callback("0"),
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                  height: 50,
+                  width: 140,
+                  decoration: BoxDecoration(
+                      color: Colors.white24,
+                      borderRadius: BorderRadius.circular(27)),
+                  child: const Text(
+                    textAlign: TextAlign.start,
+                    "0",
+                    style: TextStyle(color: Colors.white, fontSize: 25),
+                  ),
                 ),
               ),
               White24Button(buttonText: ".", callBackFunction: callback),
