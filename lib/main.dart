@@ -75,9 +75,15 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     } else if (varInput == "=") {
       double out = output(double.parse(displayValue));
-      setState(() {
-        displayValue = out.toString();
-      });
+      if (out * 10 % 10 == 0) {
+        setState(() {
+          displayValue = out.toInt().toString();
+        });
+      } else {
+        setState(() {
+          displayValue = out.toString();
+        });
+      }
     } else if (varInput == "AC") {
       setState(() {
         displayValue = "0";
