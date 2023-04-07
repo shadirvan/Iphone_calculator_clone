@@ -119,10 +119,13 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.symmetric(horizontal: 35),
             height: 100,
             width: double.infinity,
-            child: Text(
-              displayValue,
-              textAlign: TextAlign.end,
-              style: TextStyle(fontSize: 50),
+            child: FittedBox(
+              alignment: Alignment.centerRight,
+              child: Text(
+                displayValue,
+                style: TextStyle(fontSize: 75),
+                textAlign: TextAlign.right,
+              ),
             ),
           ),
           Row(
@@ -171,16 +174,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 onTap: () => callback("0"),
                 child: Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-                  height: 50,
-                  width: 140,
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                  height: 70,
+                  width: 165,
                   decoration: BoxDecoration(
                       color: Colors.white24,
-                      borderRadius: BorderRadius.circular(27)),
+                      borderRadius: BorderRadius.circular(35)),
                   child: const Text(
-                    textAlign: TextAlign.start,
+                    textAlign: TextAlign.left,
                     "0",
-                    style: TextStyle(color: Colors.white, fontSize: 25),
+                    style: TextStyle(color: Colors.white, fontSize: 30),
                   ),
                 ),
               ),

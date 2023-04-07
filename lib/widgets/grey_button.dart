@@ -11,10 +11,10 @@ class GreyButton extends StatelessWidget {
       onTap: () => callBackFunction(buttonText),
       child: CircleAvatar(
         backgroundColor: Colors.grey,
-        radius: 27,
+        radius: 35,
         child: Text(
           buttonText,
-          style: const TextStyle(color: Colors.black, fontSize: 25),
+          style: const TextStyle(color: Colors.black, fontSize: 30),
         ),
       ),
     );

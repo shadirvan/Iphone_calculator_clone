@@ -12,10 +12,10 @@ class YellowButton extends StatelessWidget {
       onTap: () => callBackFunction(buttonText),
       child: CircleAvatar(
         backgroundColor: Colors.orange,
-        radius: 27,
+        radius: 35,
         child: Text(
           buttonText,
-          style: const TextStyle(color: Colors.white, fontSize: 25),
+          style: const TextStyle(color: Colors.white, fontSize: 30),
         ),
       ),
     );
